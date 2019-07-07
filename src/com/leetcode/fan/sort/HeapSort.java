@@ -6,6 +6,24 @@ package com.leetcode.fan.sort;
  */
 
 public class HeapSort {
+    public static void main(String[] args) {
+        int[] arr = {50, 10, 90, 30, 70, 40, 80, 60, 20};
+        System.out.println("排序之前：");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+
+        // 堆排序
+        heapSort(arr);
+
+        System.out.println();
+        System.out.println("排序之后：");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
+    }
+
     /**
      * 堆排序
      */
@@ -22,12 +40,6 @@ public class HeapSort {
         }
     }
 
-    private static void swap(int[] arr, int k, int j) {
-        int temp = arr[k];
-        arr[k] = arr[j];
-        arr[j] = temp;
-    }
-
     /**
      * 构建大顶堆的过程
      *
@@ -38,8 +50,8 @@ public class HeapSort {
     private static void heapAdjust(int[] arr, int i, int n) {
         int child;
         int father;
-        for (father = arr[i]; arr[i << 1 + 1] < n; i = child) { // arr[i << 1 + 1] : 左孩子节点
-            child = arr[i << 1 + 1];
+        for (father = arr[i]; leftChild(i) < n; i = child) {
+            child = leftChild(i);
 
             // 如果左子树小于右子树，则需要比较右子树和父节点
             if (child != n - 1 && arr[child] < arr[child + 1]) {
@@ -56,58 +68,16 @@ public class HeapSort {
         arr[i] = father;
     }
 
-    public static void main(String[] args) {
-        int[] tree = {2, 5, 3, 1, 10, 4, 6};
-//        int n = 7;
-        heapSort(tree);
-//        buildHeap(tree, n);
-        for (int i = 0; i < tree.length - 1; i++) {
-            System.out.println(tree[i]);
-        }
+    // 获取到左孩子结点
+    private static int leftChild(int i) {
+        return 2 * i + 1;
     }
 
-//    private static void heapify(int[] tree, int n, int i) {
-//        if (i >= n)
-//            return;
-//
-//        int leChild = (i << 1) + 1;
-//        int riChild = leChild + 1;
-//        int max = i;
-//        if (leChild < n && (tree[leChild] > tree[max]))
-////            max = leChild;
-//            swap(tree, max, leChild);
-//
-//        if (riChild < n && tree[riChild] > tree[max])
-////            max = riChild;
-//            swap(tree, max, riChild);
-//        if (max != i)
-//            swap(tree, max, i);
-//            heapify(tree, n ,max);
-//    }
-
-    /**
-     * 建立堆
-     * @param tree 待建立的堆对应的数组
-     * @param n 堆个数
-     */
-//    private static void buildHeap(int[] tree, int n) {
-//        int lastNode = n - 1;
-//        int parentNode = (lastNode - 1) >> 1;
-//        int i;
-//        for (i = parentNode; i >= 0; i--) {
-//            heapify(tree, n, i);
-//        }
-//    }
-
-//    private static void heapSort(int[] tree, int n) {
-//        buildHeap(tree, n);
-//        int i;
-//        for (i = n - 1; i >= 0; i--) {
-//            swap(tree, i, 0);
-//            heapify(tree, i, 0); // i : 当前树的数量
-//        }
-//
-//    }
+    // 交换元素位置
+    private static void swap(int[] arr, int index1, int index2) {
+        int tmp = arr[index1];
+        arr[index1] = arr[index2];
+        arr[index2] = tmp;
+    }
 
 }
-
