@@ -1,7 +1,7 @@
 package com.leetcode.fan.sort;
 
 /**
- * Created by : PF
+ * @author : PF_23
  * Date on : 2019-07-07.
  */
 
@@ -28,16 +28,24 @@ public class HeapSort {
      * 堆排序
      */
     private static void heapSort(int[] arr) {
+        // 构建过程
         // 将待排序的序列构建成一个大顶堆
-        for (int i = arr.length / 2; i >= 0; i--) {
+        for (int i = arr.length >> 1; i >= 0; i--) {
             heapAdjust(arr, i, arr.length);
         }
-
+        System.out.println();
+        System.out.println("=======================================================");
+        // 排序过程
         // 逐步将每个最大值的根节点与末尾元素交换，并且再调整二叉树，使其成为大顶堆
         for (int i = arr.length - 1; i > 0; i--) {
-            swap(arr, 0, i); // 将堆顶记录和当前未经排序子序列的最后一个记录交换
-            heapAdjust(arr, 0, i); // 交换之后，需要重新检查堆是否符合大顶堆，不符合则要调整
+
+            // 将堆顶记录和当前未经排序子序列的最后一个记录交换
+            swap(arr, 0, i);
+            // 交换之后，需要重新检查堆是否符合大顶堆，不符合则要调整
+            heapAdjust(arr, 0, i);
+            System.out.println(arr[i]);
         }
+        System.out.println("=======================================================");
     }
 
     /**
@@ -50,7 +58,9 @@ public class HeapSort {
     private static void heapAdjust(int[] arr, int i, int n) {
         int child;
         int father;
+        // 循环遍历，构建堆（可能需要多次交换才能完成，所以在for循环结束之后才重新赋值给最开始的根节点）
         for (father = arr[i]; leftChild(i) < n; i = child) {
+
             child = leftChild(i);
 
             // 如果左子树小于右子树，则需要比较右子树和父节点
@@ -68,12 +78,23 @@ public class HeapSort {
         arr[i] = father;
     }
 
-    // 获取到左孩子结点
+    /**
+     * 获取到左孩子结点
+     *
+     * @param i
+     * @return
+     */
     private static int leftChild(int i) {
         return 2 * i + 1;
     }
 
-    // 交换元素位置
+    /**
+     * 交换元素位置
+     *
+     * @param arr    数组
+     * @param index1 下标1
+     * @param index2 下标2
+     */
     private static void swap(int[] arr, int index1, int index2) {
         int tmp = arr[index1];
         arr[index1] = arr[index2];
