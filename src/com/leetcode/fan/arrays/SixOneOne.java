@@ -10,15 +10,15 @@ import java.util.Arrays;
 
 public class SixOneOne {
     public int triangleNumber(int[] nums) {
-        if (nums == null || nums.length == 0) {
+        if (nums.length < 3) {
             return 0;
         }
         Arrays.sort(nums);
         int right = nums.length - 1;
         int result = 0;
         for (int index = 0; index < nums.length; index++) {
-            int targetIndex = nums.length - 1 - index;
-            result += findLegalThreeEdge(nums, 0 , targetIndex - 1, nums[targetIndex]);
+            int targetIndex = right - index;
+            result += findLegalThreeEdge(nums, 0, targetIndex - 1, nums[targetIndex]);
         }
         return result;
     }
@@ -40,7 +40,7 @@ public class SixOneOne {
     }
 
     public static void main(String[] args) {
-        int[] nums = {2,2,3,4};
+        int[] nums = {2, 2, 3, 4};
         SixOneOne sixOneOne = new SixOneOne();
         int count = sixOneOne.triangleNumber(nums);
         System.out.println("最多能构成的三角形个数为：" + count);
