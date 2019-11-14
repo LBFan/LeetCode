@@ -35,9 +35,14 @@ public class Test {
         return stack.isEmpty();
     }
     public static void main(String[] args) {
-        String s = "((([][])))";
-        boolean result = isValid(s);
-        System.out.println(result);
+//        String s = "((([][])))";
+//        boolean result = isValid(s);
+//        System.out.println(result);
+        System.out.println(Math.round(-2.5));
+        System.out.println(Math.round(-2.6));
+        System.out.println(Math.round(2.6));
+        System.out.println(Math.round(2.5));
+        System.out.println(Math.round(2.4));
     }
 }
 
