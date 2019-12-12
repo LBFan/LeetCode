@@ -20,10 +20,12 @@ public class FiveSecond {
         if (row >= n) {
             count++;
         }
-        int bits = (~(col | pie | na)) & ((1 << n) - 1); // 得到空位
+        // 得到空位
+        int bits = (~(col | pie | na)) & ((1 << n) - 1);
         while (bits > 0) {
-            int p = bits & -bits; // 得到最后1-bit
+            int p = bits & -bits; // 得到最后的1个空bit： -bit在计算机中是补码表示，即取反再+1
             DFS(n, row + 1, col | p, (pie | p) << 1, (na | p) >> 1);
+            // 去掉最后的1bit
             bits &= (bits - 1);
         }
         return count;
